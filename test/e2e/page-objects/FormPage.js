@@ -55,7 +55,7 @@ class FormPage {
   submit() {
     return this.submitButton().click();
   }
-
+  
   getErrorMessage() {
     var errorEl = this.$('.okta-form-infobox-error.infobox.infobox-error p');
     browser.wait(EC.presenceOf(errorEl));
