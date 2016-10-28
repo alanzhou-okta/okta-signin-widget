@@ -4,7 +4,9 @@
 var OktaSignIn = (function () {
 
   var config  = require('json!config/config'),
-      _ = require('underscore');
+      _ = require('underscore'),
+      $ = require('jquery'),
+      Backbone = require('backbone');
 
   function getProperties(authClient, LoginRouter, Util, config) {
 
@@ -26,6 +28,19 @@ var OktaSignIn = (function () {
       .fail(function () {
         callback('There was a problem closing the session');
       });
+    }
+
+    function closeWidget() {
+      $('#okta-sign-in').remove();
+      Backbone.history.stop();
+    }
+
+    function hideWidget() {
+      $('#okta-sign-in').hide();
+    }
+
+    function showWidget() {
+      $('#okta-sign-in').show();
     }
 
     /**
@@ -112,6 +127,9 @@ var OktaSignIn = (function () {
     return {
       renderEl: render,
       signOut: closeSession,
+      close: closeWidget,
+      hide: hideWidget,
+      show: showWidget,
       idToken: {
         refresh: refreshIdToken
       },
